@@ -5,7 +5,7 @@
      <meta charset="UTF-8"> 
      <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-     <title>Duronto</title> 
+     <title> Sweet Home </title> 
      <link rel="icon" type="image/png" href="./images/favicon.png"> 
      <link rel="stylesheet" href="./fontawesome-free-6.3.0-web/css/all.min.css"> 
  </head> 
@@ -230,23 +230,35 @@
  <body> 
      <div class="container" id="container"> 
          <div class="form-container sign-up-container"> 
-             <form action="#" id="signUpForm"> 
+             <form action="#" id="signUpForm" name="submit-to-google-sheet"> 
                  <i class="fa fa-times" aria-hidden="true" style="position: absolute; top: 12; right: 12;"></i> 
                  <h1>Create Account</h1> 
                  <span>or use your email for registration</span> 
-                 <input type="text" placeholder="Name" id="signUpName" /> 
-                 <input type="email" placeholder="Email" id="signUpEmail" /> 
-                 <input type="password" placeholder="Password" id="signUpPassword" /> 
-                 <button>Sign Up to SweetHome</button> 
+                 <input type="text" placeholder="Name" id="signUpName" name="Name" required /> 
+                 <input type="email" placeholder="Email" id="signUpEmail" name="Email" required /> 
+                 <input type="password" placeholder="Password" id="signUpPassword" name="Password" required /> 
+                 <input type="submit" name="submit">  
              </form> 
+              <script>
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbwwgGytpbyEUPM7CEO-E6FkRI4rNWniOS8gk_Mtz6zz7N6MA4dFbK9ajlqy1Nf2lK87HA/exec'
+                const form = document.forms['submit-to-google-sheet']
+              
+                form.addEventListener('submit', e => {
+                  e.preventDefault()
+                  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                    .then(response => console.log('Success!', response))
+                    .catch(error => console.error('Error!', error.message))
+                })
+              </script>
+             
          </div> 
   
          <div class="form-container sign-in-container"> 
              <form action="#" id="signInForm"> 
                  <h1>Sign in to SweetHome</h1> 
                  <span>or use your account</span> 
-                 <input type="email" placeholder="Email" id="signInEmail" /> 
-                 <input type="password" placeholder="Password" id="signInPassword" /> 
+                 <input type="email" placeholder="Email" id="signInEmail" name="name1" /> 
+                 <input type="password" placeholder="Password" id="signInPassword" name="password" /> 
                  <a href="#">Forgot your password?</a> 
                  <button type="submit">Sign In</button> 
              </form> 
@@ -338,5 +350,6 @@
          } 
      }); 
  </script> 
+ 
   
  </html>
